@@ -22,6 +22,8 @@ public class User {
 	
 	private String bio;
 	
+	private String email;
+	
 	private String password;
 	
 	@Column(name="created_at")
@@ -29,16 +31,29 @@ public class User {
 	
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
+	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 
-	public User(Integer id, String name, String bio, String password, LocalDateTime createdAt,
+	public User(Integer id, String name, String bio, String email, String password, LocalDateTime createdAt,
 			LocalDateTime updatedAt) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.bio = bio;
+		this.email = email;
 		this.password = password;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Integer getId() {

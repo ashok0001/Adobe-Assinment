@@ -1,8 +1,9 @@
 package com.adobe.exception;
 
-public class UserException extends Exception {
+public class PostException extends Exception {
 	
-	public UserException(String message) {
+	public PostException(String message) {
+		
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
