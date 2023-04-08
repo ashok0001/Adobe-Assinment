@@ -1,5 +1,7 @@
 package com.adobe.controller;
 
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,6 +23,8 @@ import com.adobe.request.LoginRequest;
 import com.adobe.response.AuthResponse;
 import com.adobe.service.CustomUserDetailsService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api")
@@ -39,15 +43,17 @@ public class AuthController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws UserException{
+	public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody User user) throws UserException{
 		
 		  	String email = user.getEmail();
 	        String password = user.getPassword();
 	        
-	        
+	        Optional<User> isEmailExist=userRepository.findByEmail(email);
 
 	        // Check if user with the given email already exists
-	        if (userRepository.findByEmail(email).isPresent()) {
+	        if (isEmailExist.isPresent()) {
+	        	System.out.println("--------- exist "+isEmailExist.get().getEmail());
+	        	
 	            throw new UserException("Email Is Already Used With Another Account");
 	        }
 

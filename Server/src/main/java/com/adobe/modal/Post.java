@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Post {
@@ -26,6 +27,7 @@ public class Post {
 	@ManyToOne
 	private User user;
 	
+	@Size(min=1,max=50, message="name must be between 1 and 50 characters")
 	private String content;
 	
 	@Column(name="created_at")
