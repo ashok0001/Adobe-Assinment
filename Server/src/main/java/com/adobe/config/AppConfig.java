@@ -1,6 +1,9 @@
 package com.adobe.config;
 
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,6 +13,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 
 @Configuration
@@ -26,11 +34,33 @@ public class AppConfig {
 		.anyRequest().authenticated()
 		.and()
 		.addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class)
-		.csrf().disable().cors().disable().formLogin();
+		.csrf().disable().cors().configurationSource(new CorsConfigurationSource() {
+			
+			@Override
+			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+				// TODO Auto-generated method stub
+				CorsConfiguration cfg = new CorsConfiguration();
+				
+				cfg.setAllowedOrigins(Arrays.asList(
+						"https://adobe-assinment-production.up.railway.app",
+						"http://localhost:3000", 
+						"http://localhost:4000"));
+				//cfg.setAllowedMethods(Arrays.asList("GET", "POST","DELETE","PUT"));
+				cfg.setAllowedMethods(Collections.singletonList("*"));
+				cfg.setAllowCredentials(true);
+				cfg.setAllowedHeaders(Collections.singletonList("*"));
+				cfg.setExposedHeaders(Arrays.asList("Authorization"));
+				cfg.setMaxAge(3600L);
+				return cfg;
+				
+			}
+		}).and().formLogin();
 		
 		return http.build();
 		
 	}
+	
+
 	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
