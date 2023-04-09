@@ -1,0 +1,29 @@
+.formContainer{
+    border-radius: 5px;
+    width: 30%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+    
+}
+
+.mainBox{
+   
+    min-height: 100vh;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(235, 235, 235);
+}
+
+.signinButton, .emailINput, .passwordInput,.formWrapper{
+    width: 100%;
+}
+.heading{
+    font-size: 29px;
+    font-weight: 600;
+   padding-bottom: 1rem;
+   padding-top: 0px;
+  
+}
