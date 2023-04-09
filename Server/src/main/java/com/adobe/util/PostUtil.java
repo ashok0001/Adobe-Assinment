@@ -15,7 +15,7 @@ public class PostUtil {
       public int compare(Post p1, Post p2) {
         int likes1 = p1.getLikedUser().size();
         int likes2 = p2.getLikedUser().size();
-        return likes1 - likes2;
+        return likes2 - likes1;
       }
     };
     Collections.sort(posts, comparator);

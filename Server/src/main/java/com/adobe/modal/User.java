@@ -2,6 +2,9 @@ package com.adobe.modal;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +38,7 @@ public class User {
 	private String email;
 	
 	@NotBlank(message= "Password is Required")
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private String password;
 	
 	@OneToMany
@@ -129,6 +133,24 @@ public class User {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bio, email, id, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(bio, other.bio) && Objects.equals(email, other.email) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name);
 	}
 	
 	

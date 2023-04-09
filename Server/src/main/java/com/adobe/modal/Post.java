@@ -2,6 +2,7 @@ package com.adobe.modal;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import com.adobe.dto.UserDto;
 
@@ -40,7 +41,7 @@ public class Post {
 	
 	@Column(name="like_by_users")
 	@ManyToMany
-	private List<User> likedUser;
+	private Set<User> likedUser;
 	
 	public Post() {
 		// TODO Auto-generated constructor stub
@@ -48,7 +49,7 @@ public class Post {
 
 	public Post(Integer id, User user,
 			@Size(min = 1, max = 50, message = "name must be between 1 to 300 characters") String content,
-			LocalDateTime createdAt, LocalDateTime updatedAt, List<User> likedUser) {
+			LocalDateTime createdAt, LocalDateTime updatedAt, Set<User> likedUser) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -98,14 +99,13 @@ public class Post {
 		this.updatedAt = updatedAt;
 	}
 
-	public List<User> getLikedUser() {
+	public Set<User> getLikedUser() {
 		return likedUser;
 	}
 
-	public void setLikedUser(List<User> likedUser) {
+	public void setLikedUser(Set<User> likedUser) {
 		this.likedUser = likedUser;
 	}
-
 	
 
 	

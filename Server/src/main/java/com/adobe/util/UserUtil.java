@@ -13,7 +13,7 @@ public class UserUtil {
 	      public int compare(User u1, User u2) {
 	        int likes1 = u1.getPosts().size();
 	        int likes2 = u2.getPosts().size();
-	        return likes1 - likes2;
+	        return likes2 - likes1;
 	      }
 	    };
 	    Collections.sort(users, comparator);

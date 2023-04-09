@@ -3,6 +3,7 @@ package com.adobe.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -108,16 +109,12 @@ public class PostServiceImplementation implements PostService {
 		
 		Post post = findPostById(postId);
 		
-		User postsUser = new User();
+		Set<User> likedUsers = post.getLikedUser();
 		
-		postsUser.setEmail(user.getEmail());
-		postsUser.setId(user.getId());
-		postsUser.setName(user.getName());
+		if(!likedUsers.contains(user)) {
+			likedUsers.add(user);
+		}
 		
-		
-		post.getLikedUser().add(postsUser);
-	
-	
 		return postRepository.save(post);
 		
 	}
@@ -129,14 +126,7 @@ public class PostServiceImplementation implements PostService {
 		
 		Post post = findPostById(postId);
 		
-		User postsUser=new User();
-		
-		postsUser.setEmail(user.getEmail());
-		postsUser.setId(user.getId());
-		postsUser.setName(user.getName());
-		
-		
-		post.getLikedUser().remove(postsUser);
+		post.getLikedUser().remove(user);
 	
 	
 		return postRepository.save(post);

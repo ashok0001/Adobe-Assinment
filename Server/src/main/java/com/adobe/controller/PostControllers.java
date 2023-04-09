@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adobe.controller.mapper.PostMapper;
+import com.adobe.dto.PostDto;
+import com.adobe.dto.UserDto;
 import com.adobe.exception.PostException;
 import com.adobe.exception.UserException;
 import com.adobe.modal.Post;
@@ -29,67 +32,75 @@ public class PostControllers {
 	private UserService userService;
 	private PostService postService;
 	private PostRepository postRepository;
+	private PostMapper postMapper;
 	
-	public PostControllers(PostRepository postRepository,UserService userService,PostService postService) {
+	public PostControllers(PostRepository postRepository,UserService userService,PostService postService, PostMapper postMapper) {
 		
 		this.postRepository=postRepository;
 		this.userService=userService;
 		this.postService=postService;
+		this.postMapper=postMapper;
 		
 	}
 	
 	
 	
 	@PostMapping("/posts")
-	public ResponseEntity<Post> createPostHandler(@RequestBody PostRequest postReuest,@RequestHeader("Authorization") String token) throws UserException{
-		
-	
+	public ResponseEntity<PostDto> createPostHandler(@RequestBody PostRequest postReuest,@RequestHeader("Authorization") String token) throws UserException{
 		
 		User user= userService.getUserProfile(token);
 		
-		
-		
 		postReuest.setUserId(user.getId());
-		
-		
-		
+	
 		Post createdPost = postService.createPost(postReuest);
 		
-		return new ResponseEntity<Post>(createdPost, HttpStatus.CREATED);
+		PostDto postDto = postMapper.toPostDto(createdPost);
+		
+		return new ResponseEntity<PostDto>(postDto, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/posts/{postId}")
-	public ResponseEntity<Post> findPostByIdHandler(@PathVariable Integer postId) throws UserException, PostException{
+	public ResponseEntity<PostDto> findPostByIdHandler(@PathVariable Integer postId) throws UserException, PostException{
 
 		
-		Post createdPost=postService.findPostById(postId);
+		Post post=postService.findPostById(postId);
+		
+		PostDto postDto = postMapper.toPostDto(post);
 		
 		
-		
-		return new ResponseEntity<Post>(createdPost,HttpStatus.ACCEPTED);
+		return new ResponseEntity<PostDto>(postDto,HttpStatus.ACCEPTED);
 		
 	}
 	
 	@PutMapping("/posts/{postId}/like")
-	public ResponseEntity<Post> likePostHandler(@PathVariable("postId") Integer postId, @RequestHeader("Authorization") String token) throws UserException, PostException{
+	public ResponseEntity<ApiResponse> likePostHandler(@PathVariable("postId") Integer postId, @RequestHeader("Authorization") String token) throws UserException, PostException{
 		
 		User user=userService.getUserProfile(token);
 		
-		Post updatedPost=postService.likePost(postId, user.getId());
+		postService.likePost(postId, user.getId());
 		
-		return new ResponseEntity<Post>(updatedPost,HttpStatus.OK);
+		ApiResponse res=new ApiResponse();
+		res.setMessage("liked Post");
+		res.setStatus(true);
+		
+		
+		return new ResponseEntity<ApiResponse>(res,HttpStatus.OK);
 		
 	}
 	
 	
 	@PutMapping("/posts/{postId}/unlike")
-	public ResponseEntity<Post> unLikePostHandler(@PathVariable("postId") Integer postId, @RequestHeader("Authorization") String token) throws UserException, PostException{
+	public ResponseEntity<ApiResponse> unLikePostHandler(@PathVariable("postId") Integer postId, @RequestHeader("Authorization") String token) throws UserException, PostException{
 		
 		User reqUser=userService.getUserProfile(token);
 		
-		Post updatedPost=postService.unLikePost(postId, reqUser.getId());
+		postService.unLikePost(postId, reqUser.getId());
 		
-		return new ResponseEntity<Post>(updatedPost,HttpStatus.OK);
+		ApiResponse res=new ApiResponse();
+		res.setMessage("unliked Post");
+		res.setStatus(true);
+		
+		return new ResponseEntity<ApiResponse>(res,HttpStatus.OK);
 				
 	}
 	
@@ -130,13 +141,13 @@ public class PostControllers {
 	}
 	
 	@GetMapping("/analytics/posts/top-liked")
-	public ResponseEntity<List<Post>> topLikedPostHandler() throws UserException{
+	public ResponseEntity<List<PostDto>> topLikedPostHandler() throws UserException{
 		
 		List<Post> posts= postService.topLikedPost();
 		
-	
+		List<PostDto> postDtos=postMapper.toPostDtos(posts);
 		
-		return new ResponseEntity<>(posts,HttpStatus.OK);
+		return new ResponseEntity<>(postDtos,HttpStatus.OK);
 		
 	}
 
