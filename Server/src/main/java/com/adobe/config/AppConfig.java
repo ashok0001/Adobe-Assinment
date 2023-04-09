@@ -1,5 +1,7 @@
 package com.adobe.config;
 
+
+import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,6 +22,10 @@ public class AppConfig {
 		.requestMatchers(HttpMethod.POST,"api/users").permitAll()
 		.requestMatchers(HttpMethod.POST,"api/signin").permitAll()
 		.requestMatchers(HttpMethod.GET,"/").permitAll()
+		.requestMatchers("/swagger-ui.html").permitAll()
+        .requestMatchers("/swagger-ui/**").permitAll()
+        .requestMatchers("/v3/api-docs/**").permitAll()
+		
 		.anyRequest().authenticated()
 		.and()
 		.csrf().disable().cors().disable().formLogin();

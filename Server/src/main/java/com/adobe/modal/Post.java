@@ -27,7 +27,7 @@ public class Post {
 	@ManyToOne
 	private User user;
 	
-	@Size(min=1,max=50, message="name must be between 1 and 50 characters")
+	@Size(min=1,max=50, message="name must be between 1 to 300 characters")
 	private String content;
 	
 	@Column(name="created_at")
@@ -39,9 +39,14 @@ public class Post {
 	@Column(name="like_by_users")
 	@ManyToMany
 	private List<User> likedUser;
+	
+	public Post() {
+		// TODO Auto-generated constructor stub
+	}
 
-	public Post(Integer id, User user, String content, LocalDateTime createdAt, LocalDateTime updatedAt,
-			List<User> likedUser) {
+	public Post(Integer id, User user,
+			@Size(min = 1, max = 50, message = "name must be between 1 to 300 characters") String content,
+			LocalDateTime createdAt, LocalDateTime updatedAt, List<User> likedUser) {
 		super();
 		this.id = id;
 		this.user = user;

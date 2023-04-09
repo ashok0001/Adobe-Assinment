@@ -1,12 +1,14 @@
 package com.adobe.modal;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -22,7 +24,7 @@ public class User {
 	private Integer id;
 	
 	@NotBlank(message= "Name is Required")
-	@Size(min=1,max=50, message="name must be between 1 and 50 characters")
+	@Size(min=1,max=50, message="name must be between 1 to 50 characters")
 	private String name;
 	
 	@Size(max=200, message="name must be max 200 characters")
@@ -35,6 +37,9 @@ public class User {
 	@NotBlank(message= "Password is Required")
 	private String password;
 	
+	@OneToMany
+	private List<Post> posts;
+	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
@@ -45,7 +50,11 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Integer id, String name, String bio, String email, String password, LocalDateTime createdAt,
+	public User(Integer id,
+			@NotBlank(message = "Name is Required") @Size(min = 1, max = 50, message = "name must be between 1 to 50 characters") String name,
+			@Size(max = 200, message = "name must be max 200 characters") String bio,
+			@NotBlank(message = "Email is Required") @Email(message = "Email should be valid") String email,
+			@NotBlank(message = "Password is Required") String password, List<Post> posts, LocalDateTime createdAt,
 			LocalDateTime updatedAt) {
 		super();
 		this.id = id;
@@ -53,8 +62,17 @@ public class User {
 		this.bio = bio;
 		this.email = email;
 		this.password = password;
+		this.posts = posts;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	public String getEmail() {

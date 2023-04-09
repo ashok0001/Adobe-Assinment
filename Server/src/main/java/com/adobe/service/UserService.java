@@ -16,5 +16,7 @@ public interface UserService {
 	public Integer totalNumberOfUsers();
 	
 	public List<User> topActiveUser();
+	
+	public User getUserProfile(String jwt) throws UserException;
 
 }
