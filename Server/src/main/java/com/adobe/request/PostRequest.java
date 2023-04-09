@@ -31,6 +31,11 @@ public class PostRequest {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
+	@Override
+	public String toString() {
+		return "PostRequest [content=" + content + ", userId=" + userId + "]";
+	}
 	
 
 }

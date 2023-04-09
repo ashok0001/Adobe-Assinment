@@ -1,5 +1,6 @@
 package com.adobe.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class UserServiceImplementation implements UserService{
 	
 	
 	
-	public UserServiceImplementation(UserRepository userRepository) {
+	public UserServiceImplementation(UserRepository userRepository,JwtTokenProvider jwtTokenProvider) {
 		this.userRepository = userRepository;
 		this.jwtTokenProvider=jwtTokenProvider;
 		
@@ -55,7 +56,7 @@ public class UserServiceImplementation implements UserService{
 			oldUser.setBio(user.getBio());
 		}
 		
-		
+		oldUser.setUpdatedAt(LocalDateTime.now());
 		return userRepository.save(oldUser);
 	}
 
@@ -91,12 +92,13 @@ public class UserServiceImplementation implements UserService{
 	@Override
 	public User getUserProfile(String jwt) throws UserException {
 		// TODO Auto-generated method stub
+	
 		
-		jwt=jwt.substring(7);
-		
-	    
+		System.out.println("email token - "+jwt);
 
 	    String email = jwtTokenProvider.getEmailFromToken(jwt);
+	    
+	    System.out.println("email token - "+email);
 	    
 	    Optional<User> opt = userRepository.findByEmail(email);
 	    

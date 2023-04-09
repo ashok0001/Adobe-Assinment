@@ -10,34 +10,53 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.adobe.exception.UserException;
 import com.adobe.modal.User;
 import com.adobe.response.ApiResponse;
+import com.adobe.response.UserAnalyticsResponse;
 import com.adobe.service.UserService;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
-	
+public class UserControllers {
+
 	private UserService userService;
-	public UserController() {
-		// TODO Auto-generated constructor stub
+	public UserControllers(UserService userService) {
+		
 		this.userService=userService;
 	}
 	
-	@GetMapping("/{userId}")
+	@GetMapping("/users")
+	public ResponseEntity<User> rootUserHandler(@PathVariable Integer userId) throws UserException{
+		
+		System.out.println("get user by id");
+		
+		User user=new User();
+		user.setEmail("demo@gmai.com");
+		
+		return new ResponseEntity<User>(user,HttpStatus.OK);
+		
+		
+	}
+	
+	@GetMapping("/users/{userId}")
 	public ResponseEntity<User> findUserByIdHandler(@PathVariable Integer userId) throws UserException{
+		
+		System.out.println("get user by id");
+		
+//		User user=new User();
+//		user.setEmail("demo@gmai.com");
 		
 		User user=userService.findUserById(userId);
 		
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 		
+		
 	}
-	@PutMapping("/{userId}")
+	@PutMapping("/users/{userId}")
 	public ResponseEntity<ApiResponse> updateUserByIdHandler(@RequestBody User user, @RequestHeader("Authorization") String jwt, @PathVariable Integer userId) throws UserException{
+		System.out.println("user - "+user.getBio()+" - id - "+userId+" - jwt - "+jwt);
 		
 		User updatedUser = userService.updatedUser(userId,user,jwt);
 		
@@ -49,8 +68,8 @@ public class UserController {
 		
 	}
 	
-	@DeleteMapping("/{userId}")
-	public ResponseEntity<ApiResponse> deleteUserByIdHandler(@RequestBody User user, @RequestHeader("Authorization") String jwt, @PathVariable Integer userId) throws UserException{
+	@DeleteMapping("/users/{userId}")
+	public ResponseEntity<ApiResponse> deleteUserByIdHandler(@RequestHeader("Authorization") String jwt, @PathVariable Integer userId) throws UserException{
 		
 		 userService.deleteUser(userId);
 		
@@ -63,13 +82,18 @@ public class UserController {
 	}
 	
 	@GetMapping("analytics/users")
-	public ResponseEntity<Integer> totalNumberOfUserHandler() throws UserException{
+	public ResponseEntity<UserAnalyticsResponse> totalNumberOfUserHandler() throws UserException{
 		
 		Integer totalUsers= userService.totalNumberOfUsers();
-		
+		System.out.println("number of users -- "+totalUsers);
 	
+		UserAnalyticsResponse res=new UserAnalyticsResponse();
+		res.setStatus(true);
+		res.setTotal_users(totalUsers);
 		
-		return new ResponseEntity<>(totalUsers,HttpStatus.OK);
+		System.out.println(" res---- "+res);
+		
+		return new ResponseEntity<UserAnalyticsResponse>(res,HttpStatus.OK);
 		
 	}
 	
@@ -83,5 +107,4 @@ public class UserController {
 		return new ResponseEntity<>(users,HttpStatus.OK);
 		
 	}
-
 }

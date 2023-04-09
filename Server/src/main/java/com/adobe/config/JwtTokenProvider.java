@@ -20,7 +20,7 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtTokenProvider {
 
-	SecretKey key=Keys.hmacShaKeyFor(JwtSecurityContent.JWT_KEY.getBytes());
+	SecretKey key = Keys.hmacShaKeyFor(JwtSecurityContent.JWT_KEY.getBytes());
 	
 	public String generateJwtToken(Authentication authentication) {
 		

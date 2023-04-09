@@ -1,5 +1,6 @@
 package com.adobe.controller;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,7 @@ public class AuthController {
 		
 		  	String email = user.getEmail();
 	        String password = user.getPassword();
+	        String bio=user.getBio();
 	        
 	        Optional<User> isEmailExist=userRepository.findByEmail(email);
 
@@ -59,11 +61,13 @@ public class AuthController {
 
 	        // Create new user
 			User createdUser= new User();
-			createdUser.setEmail(user.getEmail());
-			createdUser.setBio(user.getBio());
-	        user.setPassword(passwordEncoder.encode(user.getPassword()));
+			createdUser.setEmail(email);
+			createdUser.setBio(bio);
+	        createdUser.setPassword(passwordEncoder.encode(password));
+	        createdUser.setCreatedAt(LocalDateTime.now());
 	        
-	        userRepository.save(user);
+	        
+	        userRepository.save(createdUser);
 
 	        // Authenticate user and generate JWT token
 	        Authentication authentication = new UsernamePasswordAuthenticationToken(email, password);

@@ -40,15 +40,9 @@ public class PostServiceImplementation implements PostService {
 		
 		User user = userService.findUserById(userId);
 		
-		User postsUser=new User();
-		
-		postsUser.setEmail(user.getEmail());
-		postsUser.setId(user.getId());
-		postsUser.setName(user.getName());
-		
 		Post createdPost= new Post();
 		createdPost.setContent(content);
-		createdPost.setUser(postsUser);
+		createdPost.setUser(user);
 		createdPost.setCreatedAt(LocalDateTime.now());
 		createdPost.setUpdatedAt(LocalDateTime.now());
 		
@@ -81,7 +75,7 @@ public class PostServiceImplementation implements PostService {
 			return "Post Updated Successfully";
 		
 		}
-		
+		oldPost.setUpdatedAt(LocalDateTime.now());
 		return "You can't update another users post";
 	}
 
@@ -114,7 +108,7 @@ public class PostServiceImplementation implements PostService {
 		
 		Post post = findPostById(postId);
 		
-		User postsUser=new User();
+		User postsUser = new User();
 		
 		postsUser.setEmail(user.getEmail());
 		postsUser.setId(user.getId());

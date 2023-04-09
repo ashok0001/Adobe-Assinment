@@ -1,14 +1,11 @@
-package com.adobe.modal;
+package com.adobe.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.adobe.dto.UserDto;
+import com.adobe.modal.User;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,38 +14,29 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Size;
 
-@Entity
-public class Post {
-
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+public class PostDto {
+	
 	private Integer id;
 	
-	@ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
 	
-	@Size(min=1,max=50, message="name must be between 1 to 300 characters")
+    private UserDto user;
+	
 	private String content;
 	
-	@Column(name="created_at")
+	
 	private LocalDateTime createdAt;
 	
-	@Column(name="updated_at")
+	
 	private LocalDateTime updatedAt;
 	
-	@Column(name="like_by_users")
-	@ManyToMany
-	private List<User> likedUser;
 	
-	public Post() {
+	private List<UserDto> likedUser;
+
+	public PostDto() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Post(Integer id, User user,
-			@Size(min = 1, max = 50, message = "name must be between 1 to 300 characters") String content,
-			LocalDateTime createdAt, LocalDateTime updatedAt, List<User> likedUser) {
+	public PostDto(Integer id, UserDto user, String content, LocalDateTime createdAt, LocalDateTime updatedAt,
+			List<UserDto> likedUser) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -58,57 +46,66 @@ public class Post {
 		this.likedUser = likedUser;
 	}
 
+
 	public Integer getId() {
 		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public User getUser() {
+
+	public UserDto getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+
+	public void setUser(UserDto user) {
 		this.user = user;
 	}
+
 
 	public String getContent() {
 		return content;
 	}
 
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
+
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+
 
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
 
+
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public List<User> getLikedUser() {
+
+	public List<UserDto> getLikedUser() {
 		return likedUser;
 	}
 
-	public void setLikedUser(List<User> likedUser) {
+
+	public void setLikedUser(List<UserDto> likedUser) {
 		this.likedUser = likedUser;
 	}
+	
+	
 
-	
-
-	
-	
-	
 }
