@@ -49,4 +49,58 @@ http://localhost:5454/users/{userId}
 no body
 
 ```
+### user analytics
+``` javascript
+method: GET
+(http://localhost:5454/analytics/users/top-active)
 
+no body
+
+```
+### Create Post
+``` javascript
+method: POST
+https://adobe-assinment-production.up.railway.app/posts
+
+{
+    "content":"Believe you can and you're halfway there -Theodore Roosevelt"
+}
+
+```
+
+
+### post analytics
+``` javascript
+method: GET
+(http://localhost:5454/analytics/post/top-liked)
+
+no body
+
+```
+
+### like post 
+``` javascript
+method: PUT
+(http://localhost:5454/posts/{postId}/like)
+
+no body
+
+```
+
+### unlike post 
+``` javascript
+method: PUT
+(http://localhost:5454/posts/{postId}/unlike)
+
+no body
+
+```
+
+### find Post By Id
+``` javascript
+method: GET
+http://localhost:5454/posts/{postId}
+
+no body
+
+```
