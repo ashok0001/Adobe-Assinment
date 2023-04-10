@@ -25,7 +25,7 @@ const Routers = () => {
 
     <div className=" w-[70%] py-10 ">
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<UserList/>} />
         <Route path="/user-list" element={<UserList />} />
         <Route path="/post-list" element={<PostList />} />
         <Route path="/update-user/:userId" element={<UpdateUserForm/>}></Route>

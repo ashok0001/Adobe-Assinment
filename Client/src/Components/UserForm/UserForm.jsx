@@ -1,10 +1,19 @@
-import { Box, Button, FormControl, FormErrorMessage, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  Input,
+} from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect } from "react";
 import * as Yup from "yup";
-import "./UserForm.css"
+import "./UserForm.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createUserAction } from "../../Redux/User/Action";
+import {
+  createUserAction,
+  getUsersProfileAction,
+} from "../../Redux/User/Action";
 import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
@@ -12,38 +21,42 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .required("Required"),
-    name: Yup.string()
+  name: Yup.string()
     .min(1, "name must be at least 1 characters")
-    .max(50,"name must be max 50 characters")
+    .max(50, "name must be max 50 characters")
     .required("Required"),
 });
 
 const UserForm = () => {
-    const initialValues = { email: "", password: "",name:"" };
-    const dispatch=useDispatch();
-    const {user}=useSelector(store=>store);
-    const navigate=useNavigate();
+  const initialValues = { email: "", password: "", name: "" };
+  const dispatch = useDispatch();
+  const { user } = useSelector((store) => store);
+  const navigate = useNavigate();
+  const jwt = localStorage.getItem("jwt");
 
-    useEffect(()=>{
-if(user.createdUser){
-  navigate("/")
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getUsersProfileAction(jwt));
+    }
+  }, [jwt]);
 
-}
-    },[user.createdUser])
+  useEffect(() => {
+    if (user.reqUser) {
+      navigate("/user-list");
+    }
+  }, [user.reqUser]);
 
-    const handleSubmit = (values, actions) => {
-        console.log(values);
-       dispatch(createUserAction(values));
-        actions.setSubmitting(false);
-      };
+
+  const handleSubmit = (values, actions) => {
+    console.log(values);
+    dispatch(createUserAction(values));
+    actions.setSubmitting(false);
+  };
   return (
     <div>
       <div className="mainBox">
-        
         <div className="formContainer">
-            
           <Box p={8} display="flex" flexDirection="column" alignItems="center">
-          
             <h1 className="heading">Social App</h1>
             <Formik
               initialValues={initialValues}
@@ -52,7 +65,7 @@ if(user.createdUser){
             >
               {(formikProps) => (
                 <Form className="formWrapper">
-                    <Field name="name">
+                  <Field name="name">
                     {({ field, form }) => (
                       <FormControl
                         isInvalid={form.errors.name && form.touched.name}
@@ -106,7 +119,7 @@ if(user.createdUser){
                       </FormControl>
                     )}
                   </Field>
-                 
+
                   <Button
                     className="signinButton"
                     mt={4}
@@ -121,8 +134,6 @@ if(user.createdUser){
             </Formik>
           </Box>
         </div>
-
-       
       </div>
     </div>
   );

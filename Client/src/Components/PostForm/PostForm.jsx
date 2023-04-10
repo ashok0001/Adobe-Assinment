@@ -4,27 +4,40 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
+import { createPostAction } from '../../Redux/Post/Action'
 
 
 const validationSchema = Yup.object().shape({
     
       content: Yup.string()
       
-      .max(50,"content must be max 300 characters")
+      .max(300,"content must be max 300 characters")
       .required("Required"),
   });
 
 const PostForm = () => {
     const initialValues={content:""};
     const location=useLocation();
-
+    const jwt=localStorage.getItem("jwt");
     const dispatch=useDispatch();
     const {user}=useSelector(store=>store);
     const navigate=useNavigate();
 
 
     const handleSubmit = (values, actions) => {
-        console.log(values);
+      const data={
+        data:values,
+        jwt:jwt,
+      }
+        console.log(location.pathname,values);
+
+        if(location.pathname==="/create-post"){
+          dispatch(createPostAction(data))
+        }
+        else{
+          
+        }
+        
         actions.setSubmitting(false);
       };
 
@@ -37,7 +50,7 @@ const PostForm = () => {
             
           <Box p={8} display="flex" flexDirection="column" alignItems="center">
           
-<h1 className="heading">{location.pathname==="/create-post"?"Create Post":"Update Post"}</h1>
+          <h1 className="heading">{location.pathname==="/create-post"?"Create Post":"Update Post"}</h1>
             <Formik
               initialValues={initialValues}
               onSubmit={handleSubmit}
@@ -49,7 +62,7 @@ const PostForm = () => {
                   <Field name="content">
                     {({ field, form }) => (
                       <FormControl
-                        isInvalid={form.errors.bio && form.touched.bio}
+                        isInvalid={form.errors.content && form.touched.content}
                         mb={4}
                       >
                         <Textarea
@@ -58,20 +71,21 @@ const PostForm = () => {
                           id="content"
                           placeholder="Content"
                         />
-                        <FormErrorMessage>{form.errors.bio}</FormErrorMessage>
+                        <FormErrorMessage>{form.errors.content}</FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
 
                  
                   <Button
-                    className="updateButton"
+                    className=""
                     mt={4}
                     colorScheme="blue"
                     type="submit"
+                    
                     isLoading={formikProps.isSubmitting}
                   >
-                    Update
+                   {location.pathname==="/create-post"?"Create Post":"Update Post"}
                   </Button>
                 </Form>
               )}

@@ -4,3 +4,5 @@ export const UPDATE_USER="UPDATE_USER";
 export const CREATE_USER="CREATE_USER";
 export const GET_TOP_ACTIVE_USER="TOP_ACTIVE_USER";
 export const TOTAL_USER="TOTAL_USER";
+export const REQ_USER ="REQ_USER";
+export const FIND_ALL_USER="FIND_ALL_USER";
