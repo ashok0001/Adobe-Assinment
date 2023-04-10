@@ -91,14 +91,10 @@ public class UserServiceImplementation implements UserService{
 
 	@Override
 	public User getUserProfile(String jwt) throws UserException {
-		// TODO Auto-generated method stub
-	
 		
-		System.out.println("email token - "+jwt);
-
+		
 	    String email = jwtTokenProvider.getEmailFromToken(jwt);
 	    
-	    System.out.println("email token - "+email);
 	    
 	    Optional<User> opt = userRepository.findByEmail(email);
 	    
@@ -108,6 +104,7 @@ public class UserServiceImplementation implements UserService{
 	    	return opt.get();
 	    	
 	    }
+//	    System.out.println("get profile - "+opt.get().getEmail());
 		
 	    throw new UserException("user not exist with email : "+email);
 

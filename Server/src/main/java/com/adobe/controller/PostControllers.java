@@ -48,13 +48,21 @@ public class PostControllers {
 	@PostMapping("/posts")
 	public ResponseEntity<PostDto> createPostHandler(@RequestBody PostRequest postReuest,@RequestHeader("Authorization") String token) throws UserException{
 		
+		System.out.println("jwt -- "+token);
+		
 		User user= userService.getUserProfile(token);
 		
 		postReuest.setUserId(user.getId());
 	
+		
+		
 		Post createdPost = postService.createPost(postReuest);
 		
 		PostDto postDto = postMapper.toPostDto(createdPost);
+		
+//		ApiResponse res=new ApiResponse();
+//		res.setMessage("liked Post");
+//		res.setStatus(true);
 		
 		return new ResponseEntity<PostDto>(postDto, HttpStatus.CREATED);
 	}

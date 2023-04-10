@@ -39,6 +39,8 @@ public class PostServiceImplementation implements PostService {
 		String content=postReuest.getContent();
 		Integer userId=postReuest.getUserId();
 		
+		
+		
 		User user = userService.findUserById(userId);
 		
 		Post createdPost= new Post();
@@ -46,7 +48,7 @@ public class PostServiceImplementation implements PostService {
 		createdPost.setUser(user);
 		createdPost.setCreatedAt(LocalDateTime.now());
 		createdPost.setUpdatedAt(LocalDateTime.now());
-		
+		System.out.println( postRepository.save(createdPost).getContent());
 		
 		return postRepository.save(createdPost);
 		
