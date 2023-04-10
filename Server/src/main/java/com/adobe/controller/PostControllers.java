@@ -50,9 +50,9 @@ public class PostControllers {
 		
 		System.out.println("jwt -- "+token);
 		
-		User user= userService.getUserProfile(token);
+//		User user= userService.getUserProfile(token);
 		
-		postReuest.setUserId(user.getId());
+//		postReuest.setUserId(user.getId());
 	
 		
 		
