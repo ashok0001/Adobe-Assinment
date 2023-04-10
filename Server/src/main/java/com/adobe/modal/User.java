@@ -38,7 +38,7 @@ public class User {
 	private String email;
 	
 	@NotBlank(message= "Password is Required")
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	
 	@OneToMany
