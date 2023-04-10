@@ -3,14 +3,22 @@ import { AiOutlineUser } from 'react-icons/ai'
 import { BsFillPencilFill } from 'react-icons/bs'
 import { MdDelete } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
+import { deleteUsersAction } from '../../Redux/User/Action'
+import { useDispatch, useSelector } from 'react-redux'
 
 const UserCard = ({user}) => {
+
     const navigate=useNavigate();
+    const jwt=localStorage.getItem("jwt");
+  const dispatch=useDispatch();
+  const storeUser=useSelector(store=>store.user);
+
     const handleNavigate=(path)=>{
         navigate(path)
     }
     const handleDelete=()=>{
-        console.log("delete");
+      const data={jwt,userId:user.id}
+        dispatch(deleteUsersAction(data))
     }
   return (
     <div>
@@ -19,13 +27,15 @@ const UserCard = ({user}) => {
             <div className="">
               <p>{user?.email}</p>
               <p className="opacity-70">{user?.name}</p>
+
+              <p className='py-2'>{user?.bio}</p>
             </div>
             <div className='flex items-center space-x-5 text-lg mt-5'>
                 <BsFillPencilFill  className='cursor-pointer' onClick={()=>handleNavigate(`/update-user/${user.id}`)}/>
 
-                <MdDelete onClick={handleDelete}/>
+                <MdDelete className='cursor-pointer' onClick={handleDelete}/>
 
-                <AiOutlineUser onClick={()=>handleNavigate(`/users/${user.id}`)}/>
+                <AiOutlineUser className='cursor-pointer' onClick={()=>handleNavigate(`/users/${user.id}`)}/>
             </div>
           </div>
     </div>

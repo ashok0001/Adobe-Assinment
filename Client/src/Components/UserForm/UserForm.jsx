@@ -41,10 +41,10 @@ const UserForm = () => {
   }, [jwt]);
 
   useEffect(() => {
-    if (user.reqUser) {
+    if (user.createdUser && !user.createdUser.error) {
       navigate("/user-list");
     }
-  }, [user.reqUser]);
+  }, [user.createdUser]);
 
 
   const handleSubmit = (values, actions) => {

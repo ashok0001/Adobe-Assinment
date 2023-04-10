@@ -4,6 +4,7 @@ import "../../App.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { findAllPostAction } from '../../Redux/Post/Action';
+import { findAllUserAction } from '../../Redux/User/Action';
 
 const UserList = () => {
   const jwt=localStorage.getItem("jwt");
@@ -13,13 +14,13 @@ const UserList = () => {
 
 
 useEffect(()=>{
-  dispatch(findAllPostAction(jwt))
-},[jwt,post.createdPost])
+  dispatch(findAllUserAction(jwt))
+},[jwt,post.createdPost,user.deletedUser])
   
   return (
     <div className='px-10 components w-full'>
-        {[1,1,1,1,1,1].map(()=>
-        <UserCard username={"username"}/>
+        {user.users?.map((item)=>
+        <UserCard user={item}/>
         )}
     </div>
   )

@@ -1,5 +1,5 @@
 import { BASE_URL } from "../../Config/API";
-import { CREATE_USER, FIND_ALL_USER, GET_TOP_ACTIVE_USER, REQ_USER } from "./ActionType";
+import { CREATE_USER, DELET_USER, FIND_ALL_USER, FIND_USER_BY_USER_ID, GET_TOP_ACTIVE_USER, REQ_USER, UPDATE_USER } from "./ActionType";
 
 
 export const createUserAction = (data) => async (dispatch) => {
@@ -24,6 +24,28 @@ export const createUserAction = (data) => async (dispatch) => {
     }
   };
 
+  export const updateUserAction = (data) => async (dispatch) => {
+    try {
+      const res = await fetch(`${BASE_URL}/users/${data.userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization":"Bearer "+data.jwt
+        },
+        body: JSON.stringify(data.data),
+      });
+      const user = await res.json();
+      console.log("Updated user :- ",user)
+
+      
+      
+      dispatch({ type: UPDATE_USER, payload: user });
+    } catch (error) {
+      console.log("catch error ", error);
+    }
+  };
+
+
   export const findAllUserAction = (jwt) => async (dispatch) => {
     try {
       const res = await fetch(`${BASE_URL}/users`, {
@@ -35,8 +57,25 @@ export const createUserAction = (data) => async (dispatch) => {
         
       });
       const users = await res.json();
-      console.log("All users :- ",users)
       dispatch({ type: FIND_ALL_USER, payload: users });
+    } catch (error) {
+      console.log("catch error ", error);
+    }
+  };
+
+  export const findUserByIdAction = (data) => async (dispatch) => {
+    try {
+      const res = await fetch(`${BASE_URL}/users/${data.userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization":"Bearer "+data.jwt
+        },
+        
+      });
+      const user = await res.json();
+      console.log("Find By Id :- ",user)
+      dispatch({ type: FIND_USER_BY_USER_ID, payload: user });
     } catch (error) {
       console.log("catch error ", error);
     }
@@ -91,6 +130,24 @@ export const createUserAction = (data) => async (dispatch) => {
       const user = await res.json();
       console.log("Top Active user :- ",user)
       dispatch({ type: GET_TOP_ACTIVE_USER, payload: user });
+    } catch (error) {
+      console.log("catch error ", error);
+    }
+  };
+
+  export const deleteUsersAction = (data) => async (dispatch) => {
+    try {
+      const res = await fetch(`${BASE_URL}/users/${data.userId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization":"Bearer "+data.jwt
+        },
+        
+      });
+      const user = await res.json();
+      console.log("Deleted User :- ",user)
+      dispatch({ type: DELET_USER, payload: user });
     } catch (error) {
       console.log("catch error ", error);
     }

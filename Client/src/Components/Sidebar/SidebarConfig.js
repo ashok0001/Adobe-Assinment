@@ -10,6 +10,7 @@ import {
     AiFillHeart,
     AiOutlinePlusCircle,
     AiFillPlusCircle,
+    AiOutlineUserAdd,
   } from "react-icons/ai";
   import { CgProfile } from "react-icons/cg";
   import { BsFilePost, BsFilePostFill } from "react-icons/bs"
@@ -40,9 +41,17 @@ export const mainu = [
       },
     
     {
-      title: "Create",
+      title: "Create Post",
       icon: <AiOutlinePlusCircle className="text-2xl mr-5" />,
       activeIcon: <AiFillPlusCircle className="text-2xl mr-5" />,
       route:"create-post"
     },
+    {
+      title: "Create User",
+      icon: <AiOutlineUserAdd className="text-2xl mr-5" />,
+      activeIcon: <AiOutlineUserAdd className="text-2xl mr-5 font-bold" />,
+      route:"signup"
+    },
+
+    // AiOutlineUserAdd
   ];

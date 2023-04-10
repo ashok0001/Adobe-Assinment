@@ -30,7 +30,7 @@ export const TopLikedPostAction = (jwt) => async (dispatch) => {
         
       });
       const posts = await res.json();
-      console.log("Top Like Post :- ",posts)
+      console.log("All Post :- ",posts)
       dispatch({ type: FIND_ALL_POST, payload: posts });
     } catch (error) {
       console.log("catch error ", error);

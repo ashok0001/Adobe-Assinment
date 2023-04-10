@@ -44,9 +44,9 @@ const PostForm = () => {
 
   return (
     <div>
-        <div className="mainBox">
+        <div className="mainBox ">
         
-        <div className="formContainer">
+        <div className="formContainer w-[60%] lg:w-[40%]">
             
           <Box p={8} display="flex" flexDirection="column" alignItems="center">
           

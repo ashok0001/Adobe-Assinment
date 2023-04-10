@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import UserForm from '../../Components/UserForm/UserForm'
 import HomePage from '../HomePage/HomePage';
@@ -9,9 +9,17 @@ import PostList from '../../Components/PostList/PostList';
 import PostForm from '../../Components/PostForm/PostForm';
 import PostAnalytics from '../../Components/PostAnalytics/PostAnalytics';
 import UserAnalytics from '../../Components/UserAnalytics/UserAnalytics';
+import { useDispatch } from 'react-redux';
+import { getUsersProfileAction } from '../../Redux/User/Action';
 
 const Routers = () => {
   const location =useLocation();
+  const dispatch=useDispatch();
+  const jwt=localStorage.getItem("jwt");
+
+  useEffect(()=>{
+dispatch(getUsersProfileAction(jwt));
+  },[jwt])
   return (
    
     <div>
