@@ -13,7 +13,7 @@ console.log("top",user.activeUsers)
   useEffect(()=>{
     dispatch(GetTopActiveUsersAction(jwt))
     dispatch(totalUser(jwt))
-  },[jwt])
+  },[jwt,,user.createdUser])
 
   return (
     <div className='px-10 lg:px-20'>

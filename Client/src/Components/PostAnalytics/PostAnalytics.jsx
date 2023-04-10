@@ -14,7 +14,7 @@ useEffect(()=>{
   dispatch(TopLikedPostAction(jwt))
   dispatch(totalPost(jwt))
 
-},[jwt])
+},[jwt,post.createdPost])
 
   return (
     <div className='px-10 lg:px-20'>
