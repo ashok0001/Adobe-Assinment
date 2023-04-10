@@ -12,10 +12,10 @@ const PostList = () => {
 
 useEffect(()=>{
   dispatch(findAllPostAction(jwt))
-},[jwt,post.createdPost])
+},[jwt,post.createdPost,post.deletedPost, post.likedPost,post.unlikedPost])
   return (
     <div className='px-10 lg:px-32 space-y-10'>
-        {!post.posts?.error && post?.posts?.map((item)=><PostCard/>)}
+        {!post.posts?.error && post?.posts?.map((item)=><PostCard post={item}/>)}
     </div>
   )
 }

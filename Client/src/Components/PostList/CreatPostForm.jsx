@@ -4,6 +4,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
+import { createPostAction } from '../../Redux/Post/Action'
 
 
 const validationSchema = Yup.object().shape({
@@ -23,7 +24,9 @@ const CreatePostForm = () => {
 
 
     const handleSubmit = (values, actions) => {
+   
         console.log(values);
+  
         actions.setSubmitting(false);
       };
 

@@ -15,7 +15,7 @@ const UserList = () => {
 
 useEffect(()=>{
   dispatch(findAllUserAction(jwt))
-},[jwt,post.createdPost,user.deletedUser])
+},[jwt,post.createdPost,user.deletedUser,user.updatedUser])
   
   return (
     <div className='px-10 components w-full'>

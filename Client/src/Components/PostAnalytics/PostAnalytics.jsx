@@ -22,7 +22,7 @@ useEffect(()=>{
     <div>
         <h1 className='text-center py-5 text-xl font-semibold'>Top Liked Posts</h1>
         <div>
-            {post.topLikedPost?.map((item)=><PostCard user={item}/>)}
+            {post.topLikedPosts?.map((item)=><PostCard post={item}/>)}
         </div>
         
     </div>

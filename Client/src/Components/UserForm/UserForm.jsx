@@ -4,6 +4,7 @@ import {
   FormControl,
   FormErrorMessage,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect } from "react";
@@ -15,6 +16,8 @@ import {
   getUsersProfileAction,
 } from "../../Redux/User/Action";
 import { useNavigate } from "react-router-dom";
+import { setFieldToNull } from "../../Redux/Post/Action";
+import { CREATE_USER } from "../../Redux/User/ActionType";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -33,6 +36,7 @@ const UserForm = () => {
   const { user } = useSelector((store) => store);
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
+  const toast=useToast()
 
   useEffect(() => {
     if (jwt) {
@@ -43,6 +47,14 @@ const UserForm = () => {
   useEffect(() => {
     if (user.createdUser && !user.createdUser.error) {
       navigate("/user-list");
+      toast({
+        title: "Account Created Successfully",
+
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      dispatch(setFieldToNull(CREATE_USER))
     }
   }, [user.createdUser]);
 
@@ -55,7 +67,7 @@ const UserForm = () => {
   return (
     <div>
       <div className="mainBox">
-        <div className="formContainer">
+        <div className="formContainer w-[60%] lg:w-[35%]">
           <Box p={8} display="flex" flexDirection="column" alignItems="center">
             <h1 className="heading">Social App</h1>
             <Formik
