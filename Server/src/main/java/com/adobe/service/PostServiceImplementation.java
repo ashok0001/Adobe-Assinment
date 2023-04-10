@@ -71,15 +71,16 @@ public class PostServiceImplementation implements PostService {
 		
 		oldPost.setContent(post.getContent());
 		
-		if(oldPost.getUser().getId().equals(userId)) {
-			System.out.println("inside delete");
-			postRepository.save(oldPost);
-		
-			return "Post Updated Successfully";
-		
-		}
+//		if(oldPost.getUser().getId().equals(userId)) {
+//			System.out.println("inside delete");
+//			
+//		
+//			
+//		
+//		}
+		postRepository.save(oldPost);
 		oldPost.setUpdatedAt(LocalDateTime.now());
-		return "You can't update another users post";
+		return "Post Updated Successfully";
 	}
 
 	@Override
