@@ -1,6 +1,6 @@
 # Adobe-Assinment Social App
 
-## Live Link https://adobe-assinment.vercel.app/
+## Live Link https://adobe-assinment.vercel.app/signup
 
 ## Backend Api https://adobe-assinment-production.up.railway.app
 
