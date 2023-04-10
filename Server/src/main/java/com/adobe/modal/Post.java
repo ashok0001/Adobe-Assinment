@@ -30,7 +30,7 @@ public class Post {
 	@ManyToOne
     private User user;
 	
-	@Size(min=1,max=300, message="name must be between 1 to 300 characters")
+	@Size(min=1, max=300, message="name must be between 1 to 300 characters")
 	private String content;
 	
 	@Column(name="created_at")

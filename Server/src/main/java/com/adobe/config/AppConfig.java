@@ -42,7 +42,7 @@ public class AppConfig {
 				CorsConfiguration cfg = new CorsConfiguration();
 				
 				cfg.setAllowedOrigins(Arrays.asList(
-						
+						"https://adobe-assinment.vercel.app",
 						"http://localhost:3000", 
 						"http://localhost:4000"));
 				//cfg.setAllowedMethods(Arrays.asList("GET", "POST","DELETE","PUT"));

@@ -48,7 +48,7 @@ public class PostControllers {
 	@PostMapping("/posts")
 	public ResponseEntity<PostDto> createPostHandler(@RequestBody PostRequest postReuest,@RequestHeader("Authorization") String token) throws UserException{
 		
-		System.out.println("jwt -- "+token);
+		System.out.println("jwt -- ");
 		
 //		User user= userService.getUserProfile(token);
 		
