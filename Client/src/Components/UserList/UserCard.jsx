@@ -32,11 +32,11 @@ const UserCard = ({user}) => {
               <p className='py-2'>{user?.bio}</p>
             </div>
             <div className='flex items-center space-x-5 text-lg mt-5'>
-                <BsFillPencilFill  className='cursor-pointer' onClick={()=>handleNavigate(`/update-user/${user.id}`)}/>
+                <BsFillPencilFill  className='cursor-pointer' onClick={()=>handleNavigate(`/update-user/${user?.id}`)}/>
 
                 <MdDelete className='cursor-pointer' onClick={handleDelete}/>
 
-                <AiOutlineUser className='cursor-pointer' onClick={()=>handleNavigate(`/users/${user.id}`)}/>
+                <AiOutlineUser className='cursor-pointer' onClick={()=>handleNavigate(`/users/${user?.id}`)}/>
             </div>
           </div>
     </div>

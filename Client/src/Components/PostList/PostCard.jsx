@@ -15,7 +15,7 @@ const PostCard = ({post}) => {
   const {user}=useSelector(store=>store);
   const posts=useSelector(store=>store.post)
   const handleNavigate=()=>{
-      navigate(`/update-post/${"post.postId"}`)
+      navigate(`/update-post/${post.id}`)
   }
 const data={
       postId:post.id,

@@ -11,6 +11,7 @@ import PostAnalytics from '../../Components/PostAnalytics/PostAnalytics';
 import UserAnalytics from '../../Components/UserAnalytics/UserAnalytics';
 import { useDispatch } from 'react-redux';
 import { getUsersProfileAction } from '../../Redux/User/Action';
+import ViewUser from '../../Components/ViewUser/ViewUser';
 
 const Routers = () => {
   const location =useLocation();
@@ -37,6 +38,7 @@ dispatch(getUsersProfileAction(jwt));
         <Route path="/user-list" element={<UserList />} />
         <Route path="/post-list" element={<PostList />} />
         <Route path="/update-user/:userId" element={<UpdateUserForm/>}></Route>
+        <Route path="/users/:userId" element={<ViewUser/>}></Route>
         <Route path="/update-post/:postId" element={<PostForm/>}></Route>
         <Route path="/create-post" element={<PostForm/>}></Route>
         <Route path="/analytics/post" element={<PostAnalytics/>}></Route>

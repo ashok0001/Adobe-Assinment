@@ -3,8 +3,10 @@ import {
   CREATE_NEW_POST,
   DELETE_POST,
   FIND_ALL_POST,
+  GET_POST_BY_ID,
   GET_TOP_LIKED_POST,
   LIKE_POST,
+  UPDATE_POST,
 } from "./ActionType";
 
 export const TopLikedPostAction = (jwt) => async (dispatch) => {
@@ -132,6 +134,44 @@ export const unlikePostAction = (data) => async (dispatch) => {
     console.log("Updated user :- ",resData)
 
     dispatch({ type: LIKE_POST, payload: resData });
+  } catch (error) {
+    console.log("catch error ", error);
+  }
+};
+
+export const findPostByIdAction = (data) => async (dispatch) => {
+  try {
+    const res = await fetch(`${BASE_URL}/posts/${data.postId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization":"Bearer "+data.jwt
+      },
+      
+    });
+    const user = await res.json();
+    console.log("Find By Id :- ",user)
+    dispatch({ type: GET_POST_BY_ID, payload: user });
+  } catch (error) {
+    console.log("catch error ", error);
+  }
+};
+
+export const updatePostAction = (data) => async (dispatch) => {
+  try {
+    const res = await fetch(`${BASE_URL}/posts/${data.postId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization":"Bearer "+data.jwt
+      },
+      body: JSON.stringify(data),
+    });
+    const user = await res.json();
+    console.log("Updated user :- ",user)
+
+  
+    dispatch({ type: UPDATE_POST, payload: user });
   } catch (error) {
     console.log("catch error ", error);
   }
