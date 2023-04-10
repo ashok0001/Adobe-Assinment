@@ -27,13 +27,14 @@ public class UserControllers {
 		this.userService=userService;
 	}
 	
-	@GetMapping("/users")
-	public ResponseEntity<User> rootUserHandler(@PathVariable Integer userId) throws UserException{
+	
+	@GetMapping("/users/req")
+	public ResponseEntity<User> getReqUserProfileHandler(@RequestHeader("Authorization")String jwt) throws UserException{
 		
-		System.out.println("get user by id");
 		
-		User user=new User();
-		user.setEmail("demo@gmai.com");
+		
+		User user=userService.getUserProfile(jwt);
+		
 		
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 		

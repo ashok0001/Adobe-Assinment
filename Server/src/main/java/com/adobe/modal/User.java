@@ -136,6 +136,12 @@ public class User {
 	}
 
 	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", bio=" + bio + ", email=" + email + ", password=" + password
+				+ ", posts=" + posts + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(bio, email, id, name);
 	}
