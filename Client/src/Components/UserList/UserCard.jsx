@@ -25,8 +25,9 @@ const UserCard = ({user}) => {
          <div className='px-10 py-5 border shadow-md mb-10 components'>
          <div className=" items-center ">
             <div className="">
-              <p>{user?.email}</p>
-              <p className="opacity-70">{user?.name}</p>
+              <p className='font-semibold text-lg'>{user?.name}</p>
+              <p className="opacity-70">{user?.email}</p>
+              
 
               <p className='py-2'>{user?.bio}</p>
             </div>
