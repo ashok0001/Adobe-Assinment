@@ -113,5 +113,11 @@ public class UserServiceImplementation implements UserService{
 
 	}
 
+	@Override
+	public List<User> findAllUsers() {
+		return userRepository.findAll();
+		
+	}
+
 	
 }

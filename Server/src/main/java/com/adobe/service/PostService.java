@@ -5,6 +5,7 @@ import java.util.List;
 import com.adobe.exception.PostException;
 import com.adobe.exception.UserException;
 import com.adobe.modal.Post;
+import com.adobe.modal.User;
 import com.adobe.request.PostRequest;
 
 
@@ -25,5 +26,7 @@ public interface PostService {
 	public Integer totalNumberOfPost();
 	
 	public List<Post> topLikedPost();
+	
+	public List<Post> findAllPost();
 
 }

@@ -159,4 +159,10 @@ public class PostServiceImplementation implements PostService {
 		return topPosts;
 	}
 
+	@Override
+	public List<Post> findAllPost() {
+		return postRepository.findAll();
+		
+	}
+
 }

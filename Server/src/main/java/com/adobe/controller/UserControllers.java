@@ -40,6 +40,18 @@ public class UserControllers {
 		
 		
 	}
+	@GetMapping("/users")
+	public ResponseEntity<List<User>> findAllUsersHandler() throws UserException{
+		
+		
+		
+		List<User> user=userService.findAllUsers();
+		
+		
+		return new ResponseEntity<List<User>>(user,HttpStatus.OK);
+		
+		
+	}
 	
 	@GetMapping("/users/{userId}")
 	public ResponseEntity<User> findUserByIdHandler(@PathVariable Integer userId) throws UserException{
