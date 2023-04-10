@@ -98,16 +98,12 @@ public class PostServiceImplementation implements PostService {
 		
 		System.out.println(post.getUser().getId()+" ------ "+user.getId());
 		
-		if(post.getUser().getId().equals(user.getId())) {
-			System.out.println("inside delete");
-			postRepository.deleteById(postId);
+		
+		postRepository.deleteById(postId);
 		
 		return "Post Deleted Successfully";
 		
-		}
-		
-		
-		throw new PostException("You Can't delete Another Users post");
+//		throw new PostException("You Can't delete Another Users post");
 		
 	}
 
