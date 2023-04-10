@@ -71,6 +71,7 @@ public class AuthController {
 	        
 	        userRepository.save(createdUser);
 
+	        System.out.println("----- "+userRepository.save(createdUser).getName());
 	        // Authenticate user and generate JWT token
 	        Authentication authentication = new UsernamePasswordAuthenticationToken(email, password);
 	        SecurityContextHolder.getContext().setAuthentication(authentication);
