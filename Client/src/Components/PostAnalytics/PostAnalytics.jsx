@@ -7,7 +7,7 @@ const PostAnalytics = () => {
     <h1 className='font-semibold font-serif pb-5'>Total Post: 200</h1>
 
     <div>
-        <h1 className='font-semibold pb-5'>Top Liked Posts</h1>
+        <h1 className='text-center py-5 text-xl font-semibold'>Top Liked Posts</h1>
         <div>
             {[1,1,1,1,1].map((item)=><PostCard username={item}/>)}
         </div>

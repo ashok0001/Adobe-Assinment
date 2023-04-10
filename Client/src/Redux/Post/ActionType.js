@@ -1,0 +1,8 @@
+export const CREATE_NEW_POST= "CREATE_NEW_POST";
+export const DELETE_POST= "DELETE_POST";
+export const LIKE_POST="LIKE_POST";
+export const UNLIKE_POST="UNLIKE_POST";
+export const GET_POST_BY_ID="GET_SINGLE_POST";
+export const GET_TOP_LIKED_POST="GET_TOP_LIKED_POST";
+export const GET_ToTAL_POST="GET_ToTAL_POST";
+export const UPDATE_POST="UPDATE_POST";

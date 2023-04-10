@@ -8,7 +8,7 @@ const UserAnalytics = () => {
 
 
 <div >
-    <h1>Top Active Users</h1>
+    <h1 className='text-center py-5 text-xl font-semibold'>Top Active Users</h1>
     <div>
             {[1,1,1,1,1].map((item)=><UserCard username={"sita raam"}/>)}
         </div>

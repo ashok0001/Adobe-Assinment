@@ -1,8 +1,11 @@
 import { Box, Button, FormControl, FormErrorMessage, Input } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import * as Yup from "yup";
 import "./UserForm.css"
+import { useDispatch, useSelector } from "react-redux";
+import { createUserAction } from "../../Redux/User/Action";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -16,11 +19,21 @@ const validationSchema = Yup.object().shape({
 });
 
 const UserForm = () => {
-    const initialValues = { email: "", password: "" };
+    const initialValues = { email: "", password: "",name:"" };
+    const dispatch=useDispatch();
+    const {user}=useSelector(store=>store);
+    const navigate=useNavigate();
+
+    useEffect(()=>{
+if(user.createdUser){
+  navigate("/")
+
+}
+    },[user.createdUser])
 
     const handleSubmit = (values, actions) => {
         console.log(values);
-       
+       dispatch(createUserAction(values));
         actions.setSubmitting(false);
       };
   return (
@@ -31,7 +44,7 @@ const UserForm = () => {
             
           <Box p={8} display="flex" flexDirection="column" alignItems="center">
           
-<h1 className="heading">Social App</h1>
+            <h1 className="heading">Social App</h1>
             <Formik
               initialValues={initialValues}
               onSubmit={handleSubmit}

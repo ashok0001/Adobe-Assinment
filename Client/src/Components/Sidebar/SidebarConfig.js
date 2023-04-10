@@ -16,11 +16,11 @@ import {
   import { SiGoogleanalytics } from "react-icons/si"
 
 export const mainu = [
-    { title: "Users", icon: <CgProfile className="text-2xl mr-5" />, activeIcon: <CgProfile className="text-2xl mr-5" />,route:"user-list" },
+    { title: "Users List", icon: <CgProfile className="text-2xl mr-5" />, activeIcon: <CgProfile className="text-2xl mr-5" />,route:"user-list" },
     
    
     {
-      title: "Posts",
+      title: "Posts List",
       icon: <BsFilePostFill className="text-2xl mr-5" />,
       activeIcon: <BsFilePost className="text-2xl mr-5" />,
       route:"post-list"

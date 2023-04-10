@@ -12,7 +12,7 @@ const PostCard = ({post}) => {
   }
   return (
     <div>
-      <div className="shadow-md px-10 pb-10">
+      <div className="shadow-md px-10 pb-10 mb-5">
         <p className="p-5 font-bold">username</p>
         <hr />
         <p className="mt-5">

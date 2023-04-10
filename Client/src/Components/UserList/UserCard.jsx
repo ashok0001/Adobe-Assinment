@@ -14,7 +14,7 @@ const UserCard = ({username}) => {
     }
   return (
     <div>
-         <div className='p-2 border shadow-md'>
+         <div className='px-10 py-5 border shadow-md mb-10 components'>
          <div className=" items-center ">
             <div className="">
               <p>{username}</p>
