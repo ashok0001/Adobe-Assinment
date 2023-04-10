@@ -12,6 +12,7 @@ import com.adobe.exception.UserException;
 import com.adobe.modal.Post;
 import com.adobe.modal.User;
 import com.adobe.repository.PostRepository;
+import com.adobe.repository.UserRepository;
 import com.adobe.request.PostRequest;
 import com.adobe.util.PostUtil;
 
@@ -26,10 +27,13 @@ public class PostServiceImplementation implements PostService {
 	
 	private UserService userService;
 	
-	public PostServiceImplementation(PostRepository postRepository,UserService userService) {
+	private UserRepository userRepository;
+	
+	public PostServiceImplementation(PostRepository postRepository,UserService userService,UserRepository userRepository) {
 		
 		this.postRepository=postRepository;
 		this.userService=userService;
+		this.userRepository=userRepository;
 		
 	}
 
@@ -50,6 +54,8 @@ public class PostServiceImplementation implements PostService {
 		createdPost.setUpdatedAt(LocalDateTime.now());
 		System.out.println( postRepository.save(createdPost).getContent());
 		
+		user.getPosts().add(createdPost);
+		userRepository.save(user);
 		return postRepository.save(createdPost);
 		
 	}
