@@ -1,6 +1,7 @@
 package com.adobe.modal;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,10 +28,9 @@ public class Post {
 	private Integer id;
 	
 	@ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 	
-	@Size(min=1,max=50, message="name must be between 1 to 300 characters")
+	@Size(min=1,max=300, message="name must be between 1 to 300 characters")
 	private String content;
 	
 	@Column(name="created_at")
@@ -41,7 +41,7 @@ public class Post {
 	
 	@Column(name="like_by_users")
 	@ManyToMany
-	private Set<User> likedUser;
+	private Set<User> likedUser =new HashSet<>();
 	
 	public Post() {
 		// TODO Auto-generated constructor stub
