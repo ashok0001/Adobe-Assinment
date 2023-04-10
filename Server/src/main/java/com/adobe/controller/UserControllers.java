@@ -58,8 +58,7 @@ public class UserControllers {
 		
 		System.out.println("get user by id");
 		
-//		User user=new User();
-//		user.setEmail("demo@gmai.com");
+
 		
 		User user=userService.findUserById(userId);
 		

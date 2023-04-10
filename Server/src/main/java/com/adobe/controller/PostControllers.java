@@ -59,6 +59,15 @@ public class PostControllers {
 		return new ResponseEntity<PostDto>(postDto, HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/posts")
+	public ResponseEntity<List<PostDto>> createPostHandler() throws UserException{
+		List<Post> posts=postService.findAllPost();
+		
+		List<PostDto> postDtos=postMapper.toPostDtos(posts);
+		
+		return new ResponseEntity<>(postDtos, HttpStatus.CREATED);
+	}
+	
 	@GetMapping("/posts/{postId}")
 	public ResponseEntity<PostDto> findPostByIdHandler(@PathVariable Integer postId) throws UserException, PostException{
 
