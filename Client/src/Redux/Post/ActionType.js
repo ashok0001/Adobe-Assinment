@@ -4,6 +4,6 @@ export const LIKE_POST="LIKE_POST";
 export const UNLIKE_POST="UNLIKE_POST";
 export const GET_POST_BY_ID="GET_SINGLE_POST";
 export const GET_TOP_LIKED_POST="GET_TOP_LIKED_POST";
-export const GET_ToTAL_POST="GET_ToTAL_POST";
+export const GET_TOTAL_POST="GET_TOTAL_POST";
 export const UPDATE_POST="UPDATE_POST";
 export const FIND_ALL_POST="FIND_ALL_POST";

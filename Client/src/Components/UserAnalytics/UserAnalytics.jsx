@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import UserCard from '../UserList/UserCard'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetTopActiveUsersAction } from '../../Redux/User/Action';
+import { GetTopActiveUsersAction, totalUser } from '../../Redux/User/Action';
 
 const UserAnalytics = () => {
 
@@ -12,11 +12,12 @@ console.log("top",user.activeUsers)
 
   useEffect(()=>{
     dispatch(GetTopActiveUsersAction(jwt))
+    dispatch(totalUser(jwt))
   },[jwt])
 
   return (
     <div className='px-10 lg:px-20'>
-        <h1 className='font-semibold font-serif pb-5'>Total User: 50</h1>
+        <h1 className='font-semibold font-serif pb-5'>Total User : {user.totalUser?.total_users}</h1>
 
 
 <div >

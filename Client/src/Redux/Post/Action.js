@@ -5,6 +5,8 @@ import {
   FIND_ALL_POST,
   GET_POST_BY_ID,
   GET_TOP_LIKED_POST,
+  GET_TOTAL_POST,
+  
   LIKE_POST,
   UPDATE_POST,
 } from "./ActionType";
@@ -152,6 +154,24 @@ export const findPostByIdAction = (data) => async (dispatch) => {
     const user = await res.json();
     console.log("Find By Id :- ",user)
     dispatch({ type: GET_POST_BY_ID, payload: user });
+  } catch (error) {
+    console.log("catch error ", error);
+  }
+};
+
+export const totalPost = (jwt) => async (dispatch) => {
+  try {
+    const res = await fetch(`${BASE_URL}/analytics/posts`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization":"Bearer "+jwt
+      },
+      
+    });
+    const total = await res.json();
+    console.log("total:- ",total)
+    dispatch({ type: GET_TOTAL_POST, payload: total });
   } catch (error) {
     console.log("catch error ", error);
   }

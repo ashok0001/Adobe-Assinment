@@ -1,4 +1,4 @@
-import { CREATE_USER, DELET_USER, FIND_ALL_USER, FIND_USER_BY_USER_ID, GET_TOP_ACTIVE_USER, REQ_USER, UPDATE_USER } from "./ActionType";
+import { CREATE_USER, DELET_USER, FIND_ALL_USER, FIND_USER_BY_USER_ID, GET_TOP_ACTIVE_USER, REQ_USER, TOTAL_USER, UPDATE_USER } from "./ActionType";
 
 
 const initialValue={
@@ -8,7 +8,8 @@ const initialValue={
     users:null,
     deletedUser:null,
     updatedUser:null,
-    findById:null
+    findById:null,
+    totalUser:0
     
 }
 
@@ -34,6 +35,9 @@ export const UserrReducer=(store=initialValue,{type,payload})=>{
     }
     else if(type===FIND_USER_BY_USER_ID){
         return {...store,findById:payload}
+    }
+    else if(type===TOTAL_USER){
+        return {...store,totalUser:payload}
     }
 
 

@@ -1,5 +1,5 @@
 import { BASE_URL } from "../../Config/API";
-import { CREATE_USER, DELET_USER, FIND_ALL_USER, FIND_USER_BY_USER_ID, GET_TOP_ACTIVE_USER, REQ_USER, UPDATE_USER } from "./ActionType";
+import { CREATE_USER, DELET_USER, FIND_ALL_USER, FIND_USER_BY_USER_ID, GET_TOP_ACTIVE_USER, REQ_USER, TOTAL_USER, UPDATE_USER } from "./ActionType";
 
 
 export const createUserAction = (data) => async (dispatch) => {
@@ -40,6 +40,24 @@ export const createUserAction = (data) => async (dispatch) => {
       
       
       dispatch({ type: UPDATE_USER, payload: user });
+    } catch (error) {
+      console.log("catch error ", error);
+    }
+  };
+
+  export const totalUser = (jwt) => async (dispatch) => {
+    try {
+      const res = await fetch(`${BASE_URL}/analytics/users`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization":"Bearer "+jwt
+        },
+        
+      });
+      const total = await res.json();
+      console.log("total:- ",total)
+      dispatch({ type: TOTAL_USER, payload: total });
     } catch (error) {
       console.log("catch error ", error);
     }

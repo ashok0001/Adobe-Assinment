@@ -1,4 +1,4 @@
-import { CREATE_NEW_POST, DELETE_POST, FIND_ALL_POST, GET_POST_BY_ID, GET_TOP_LIKED_POST, LIKE_POST, UNLIKE_POST, UPDATE_POST } from "./ActionType";
+import { CREATE_NEW_POST, DELETE_POST, FIND_ALL_POST, GET_POST_BY_ID, GET_TOP_LIKED_POST, GET_TOTAL_POST, LIKE_POST, UNLIKE_POST, UPDATE_POST } from "./ActionType";
 
 
 const initialValue={
@@ -9,7 +9,8 @@ const initialValue={
     likePost:null,
     unlikePost:null,
     findById:null,
-    updatedPost:null
+    updatedPost:null,
+    totalPost:0
     
 }
 
@@ -38,6 +39,10 @@ export const PostReducer=(store=initialValue,{type,payload})=>{
     }
     else if(type===UPDATE_POST){
         return {...store,updatedPost:payload}
+    }
+   
+    else if(type===GET_TOTAL_POST){
+        return {...store,totalPost:payload}
     }
    
 
