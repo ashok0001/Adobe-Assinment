@@ -70,7 +70,7 @@ public class UserControllers {
 	public ResponseEntity<ApiResponse> updateUserByIdHandler(@RequestBody User user, @RequestHeader("Authorization") String jwt, @PathVariable Integer userId) throws UserException{
 		System.out.println("user - "+user.getBio()+" - id - "+userId+" - jwt - "+jwt);
 		
-		User updatedUser = userService.updatedUser(userId,user,jwt);
+		userService.updatedUser(userId,user,jwt);
 		
 		ApiResponse res=new ApiResponse();
 		res.setMessage("Account updated Successfully");
